@@ -72,8 +72,7 @@
                 </div>
             </div>
         </nav>
-        @auth
-            <main class="container py-4">
+          <main class="container py-4">
             <div class="row">
                 <div class="col-xs-2 text-center">
                     <a href="{{route('discussion.create')}}" class="btn btn-info my-2">Add Discussion</a>
@@ -95,10 +94,8 @@
                 <div class="col-xs-10">
                     @yield('content')
                 </div>
-            </main>
-        @else
-            @yield('content')
-        @endauth
+            </div>
+         </main>
     </div>
 
     <!-- Scripts -->
