@@ -15,7 +15,7 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('discussion-component', require('./components/DiscussionComponent.vue'));
+// Vue.component('discussion-component', require('./components/DiscussionComponent.vue'));
 
 const app = new Vue({
     el: '#app'
