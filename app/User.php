@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Entities\Discussion;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -26,4 +27,8 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function discussions(){
+        return $this->hasMany(Discussion::class);
+    }
 }

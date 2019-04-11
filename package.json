@@ -17,5 +17,9 @@
         "laravel-mix": "^1.0",
         "lodash": "^4.17.4",
         "vue": "^2.5.7"
+    },
+    "dependencies": {
+        "@dymantic/vue-trix-editor": "^0.2.0",
+        "vue-trix": "^0.7.7"
     }
 }
