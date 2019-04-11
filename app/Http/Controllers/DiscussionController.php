@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Entities\Discussion;
+use App\Entities\Reply;
 use Session;
 use http\Env\Response;
 use Illuminate\Http\Request;
@@ -103,5 +104,14 @@ class DiscussionController extends Controller
     public function destroy(Discussion $discussion)
     {
         //
+    }
+
+    public function reply(Discussion $discussion, Reply $reply)
+    {
+        $discussion->markAsBestReply($reply);
+
+        Session::flash('success', 'Marked as best reply');
+
+        return redirect()->back();
     }
 }

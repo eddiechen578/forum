@@ -11,23 +11,55 @@
                 </div>
 
                 <hr>
-
-                {!! $discussion->content !!}
+                <div>
+                    {!! $discussion->content !!}
+                </div>
+                @if($discussion->bestReply)
+                    <div class="card bg-success my-5">
+                        <div class="car-header">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <img width="20px" height="20px" class="mr-2" style="border-radius: 50%" src="{{gravatar($discussion->bestReply->owner->email)}}" alt="">
+                                    <strong>
+                                        {{$discussion->bestReply->owner->name}}
+                                    </strong>
+                                </div>
+                                <div>
+                                    <strong>
+                                        BEST REPLY
+                                    </strong>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            {!!$discussion->bestReply->content!!}
+                        </div>
+                    </div>
+                @endif
             </div>
         </div>
 
    @foreach($discussion->replies()->paginate(3) as $reply)
         <div class="card my-4">
             <div class="card-header">
-                <div class="d-flex justfy-content-between">
+                <div class="d-flex justify-content-between">
                     <div>
                         <img width="20px" height="20px" style="border-radius: 50%" src="{{gravatar($reply->owner->email)}}" alt="">
                         <span>{{$reply->owner->name}}</span>
+                    </div>
+                    <div>
+                        @if(auth()->user()->id == $discussion->user_id)
+                            <form action="{{route('discussion.best-reply', ['discussion'=> $discussion->slug, 'reply' => $reply->id])}}" method="post">
+                                {{csrf_field()}}
+                                <button type="submit" class="btn btn-sm btn-info">Mark as best reply</button>
+                            </form>
+                        @endif
                     </div>
                 </div>
             </div>
             <div class="card-body">
                 {!!$reply->content!!}
+
             </div>
         </div>
    @endforeach
