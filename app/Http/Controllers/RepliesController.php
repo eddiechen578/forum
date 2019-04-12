@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Entities\Discussion;
 use App\Http\Requests\CreateReplyRequest;
+use App\Notifications\NewReplyAdded;
 use Illuminate\Http\Request;
 use Session;
 
@@ -41,6 +42,8 @@ class RepliesController extends Controller
             'discussion_id' => $discussion->id,
             'content' => $request->content
         ]);
+
+        $discussion->author->notify(new NewReplyAdded($discussion));
 
         Session::flash('success', 'Reply added');
 
