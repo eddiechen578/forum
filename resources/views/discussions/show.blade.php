@@ -48,23 +48,29 @@
                         <span>{{$reply->owner->name}}</span>
                     </div>
                     <div>
+                       @auth
                         @if(auth()->user()->id == $discussion->user_id)
                             <form action="{{route('discussion.best-reply', ['discussion'=> $discussion->slug, 'reply' => $reply->id])}}" method="post">
                                 {{csrf_field()}}
                                 <button type="submit" class="btn btn-sm btn-info">Mark as best reply</button>
                             </form>
                         @endif
+                       @endauth
                     </div>
                 </div>
             </div>
             <div class="card-body">
                 {!!$reply->content!!}
-
+                <span class="pull-right">{{$reply->created_at->diffForHumans()}}</span>
             </div>
         </div>
    @endforeach
-    {{$discussion->replies()->paginate(3)->links()}}
-    <div class="card my-5">
+   <div class="d-flex">
+   <div class="ml-auto">
+       {{$discussion->replies()->paginate(3)->links()}}
+   </div>
+   </div>
+    <div class="card my-2">
         <div class="card-header">
             Add a reply
         </div>

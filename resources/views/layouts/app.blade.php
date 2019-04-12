@@ -22,7 +22,7 @@
                 <div class="navbar-header">
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                        巴哈姆特
                     </a>
                 </div>
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
@@ -56,16 +56,32 @@
                         @endguest
                     </ul>
                     <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav pull-right">
-                        &nbsp;<li class="nav-item">
-                            <a href="{{route('users.notifications')}}" class="nav-link">
-                               <span class="badge badge-info">
-                                   {{auth()->user()->unreadNotifications->count()}}
-                                   Unread notifications
-                               </span>
-                            </a>
-                        </li>
-                    </ul>
+                    <div class="d-flex justify-content-between">
+                        <div>
+                         <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="{{route('discussion.index')}}" class="nav-link">
+                                    Discussions
+                                </a>
+                            </li>
+                         </ul>
+                        </div>
+                        <div>
+                            <ul class="nav navbar-nav">
+                                @auth
+                                  <li class="nav-item">
+                                        <a href="{{route('users.notifications')}}" class="nav-link">
+                                           <span class="badge badge-info">
+                                               {{auth()->user()->unreadNotifications->count()}}
+                                               Unread notifications
+                                           </span>
+                                        </a>
+                                    </li>
+                                @endauth
+                            </ul>
+                        </div>
+                     </ul>
+                  </div>
                 </div>
             </div>
         </nav>

@@ -17,10 +17,31 @@
                             <a href="{{route('discussion.show', $notification->data['discussion']['slug'])}}" class="float-right btn btn-sm btn-info">
                                 View discussion
                             </a>
+                            <small class="float-right mr-3">
+                                    {{$notification->created_at->diffForHumans()}}
+                            </small>
+                        @endif
+                        @if($notification->type === 'App\Notifications\ReplyMarkedAsBestReply')
+                            Your reply to the discussion
+                            <strong>
+                                {{$notification->data['discussion']['title']}}
+                            </strong>
+                            was marked as best reply
+                                <a href="{{route('discussion.show', $notification->data['discussion']['slug'])}}" class="float-right btn btn-sm btn-info">
+                                    View discussion
+                                </a>
+                                <small class="float-right mr-3">
+                                    {{$notification->created_at->diffForHumans()}}
+                                </small>
                         @endif
                     </li>
                 @endforeach
             </ul>
+        </div>
+        <div class="d-flex">
+            <div class="ml-auto">
+                {{$notifications->links()}}
+            </div>
         </div>
     </div>
 
